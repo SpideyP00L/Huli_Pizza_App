@@ -17,8 +17,13 @@ struct ContentView: View {
             Text("Huli Pizza Company")
             
             Image("surfBanner")
+                .resizable()
+                .scaledToFit()
             
             Text("Order Pizza")
+                .font(.title)
+            
+            Spacer()
             
         }
         .padding()
