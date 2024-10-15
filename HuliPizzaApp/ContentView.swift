@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    var orders: [Int] = [1, 2, 3, 4, 6]
+    
     var body: some View {
         VStack {
             ZStack {
@@ -19,21 +22,41 @@ struct ContentView: View {
                     .background()
             }
             
-            Text("Order Pizza")
-                .font(.title)
+            Image(systemName : orders.isEmpty ? "cart" : "cart.circle.fill")
             
-            HStack (alignment: .firstTextBaseline) {
-                Text("Your Order Item : ")
+            HStack {
+                Text("Order Pizza")
+                    .font(.title)
                 
                 Spacer()
-                
-                Text("$ 0.00")
             }
             
-            HStack (alignment: .top, spacing: 15) {
-                Image("0_sm")
-                
-                Text("Margherita")
+            ScrollView {
+                ForEach (orders, id: \.self)  { order in
+                    HStack (alignment: .firstTextBaseline) {
+                        Text("Your Order Item \(order): ")
+                        
+                        Spacer()
+                        
+                        Text(19.99, format: .currency(code: "USD"))
+                    }
+                }
+            }
+            
+            ScrollView {
+                ForEach (1...25, id: \.self) { item in
+                    HStack (alignment: .top, spacing: 15) {
+                        Image(systemName: "\(item).circle.fill")
+                            .font(.largeTitle)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Margherita")
+                            
+                            Text("Description")
+                            
+                        }
+                    }
+                }
             }
             
             Spacer()
