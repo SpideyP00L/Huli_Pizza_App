@@ -22,9 +22,14 @@ struct ContentView: View {
                     .background()
             }
             
-            Image(systemName : orders.isEmpty ? "cart" : "cart.circle.fill")
+            Label {
+                Text(59.99, format: .currency(code: "USD"))
+            } icon: {
+                Image(systemName : orders.isEmpty ? "cart" : "cart.circle.fill")
+            }
             
             HStack {
+                 
                 Text("Order Pizza")
                     .font(.title)
                 
