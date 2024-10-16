@@ -37,6 +37,8 @@ struct OrderView: View {
             }
             
         }
+        .padding()
+        .background(Color("Surf"))
     }
 }
 

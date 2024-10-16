@@ -17,11 +17,14 @@ struct ContentView: View {
         VStack {
             
             HeaderView()
+                .shadow(radius: 5)
             
             if showOrders {
                 OrderView(orders: orders) 
             } else {
                 MenuItemView()
+                    .padding()
+                    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 10))
                 
                 MenuView()
             }
@@ -30,6 +33,7 @@ struct ContentView: View {
             
         }
         .padding()
+        .background(.linearGradient(colors: [.cyan, Color("Surf"), Color("Sky"), .white], startPoint: .topLeading, endPoint: .bottom))
     }
 }
 
