@@ -22,11 +22,11 @@ struct OrderRowView: View {
             HStack(alignment: .firstTextBaseline) {
                 Text(1, format: .number)
                 
-                Text(19.99, format: .currency(code: "USD"))
+                Text(19.99, format: .currency(code: "CAD"))
                 
                 Spacer()
                 
-                Text(19.99, format: .currency(code: "USD"))
+                Text(19.99, format: .currency(code: "CAD"))
                     .fontWeight(.semibold)
             }
         }

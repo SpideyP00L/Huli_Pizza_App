@@ -36,7 +36,7 @@ struct OrderView: View {
                 Spacer()
                 
                 Label {
-                    Text(59.99, format: .currency(code: "USD"))
+                    Text(59.99, format: .currency(code: "CAD"))
                 } icon: {
                     Image(systemName : orders.isEmpty ? "cart" : "cart.circle.fill")
                 }
