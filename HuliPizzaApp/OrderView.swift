@@ -12,13 +12,21 @@ struct OrderView: View {
     var orders: [Int]
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .top) {
             
-            Label {
-                Text(59.99, format: .currency(code: "USD"))
-            } icon: {
-                Image(systemName : orders.isEmpty ? "cart" : "cart.circle.fill")
+            
+            
+            ScrollView {
+                ForEach (orders, id: \.self)  { order in
+                    OrderRowView(order: order)
+                        .padding(4)
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
+                        .shadow(radius: 10)
+                        .padding(.bottom, 5)
+                        .padding(.horizontal)
+                }
             }
+            .padding(.top, 70)
             
             HStack {
                 
@@ -26,15 +34,15 @@ struct OrderView: View {
                     .font(.title)
                 
                 Spacer()
-            }
-            
-            ScrollView {
-                ForEach (orders, id: \.self)  { order in
-                    OrderRowView(order: order)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal)
+                
+                Label {
+                    Text(59.99, format: .currency(code: "USD"))
+                } icon: {
+                    Image(systemName : orders.isEmpty ? "cart" : "cart.circle.fill")
                 }
             }
+            .padding()
+            .background(.ultraThinMaterial)
             
         }
         .padding()

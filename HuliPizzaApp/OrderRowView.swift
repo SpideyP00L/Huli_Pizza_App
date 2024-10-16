@@ -12,12 +12,23 @@ struct OrderRowView: View {
     var order: Int
     
     var body: some View {
-        HStack (alignment: .firstTextBaseline) {
-            Text("Your Order Item \(order): ")
+        VStack {
+            HStack {
+                Text("Your Order Item \(order): ")
+                
+                Spacer()
+            }
             
-            Spacer()
-            
-            Text(19.99, format: .currency(code: "USD"))
+            HStack(alignment: .firstTextBaseline) {
+                Text(1, format: .number)
+                
+                Text(19.99, format: .currency(code: "USD"))
+                
+                Spacer()
+                
+                Text(19.99, format: .currency(code: "USD"))
+                    .fontWeight(.semibold)
+            }
         }
     }
 }
