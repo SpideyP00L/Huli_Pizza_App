@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    var menu: [MenuItem]
+    
     @State var orders : [OrderItem] = testOrders
     
     @State private var showOrders : Bool = true
@@ -41,7 +43,7 @@ struct ContentView: View {
                     .padding()
                     .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 10))
                 
-                MenuView()
+                MenuView(menu: menu )
             }
             
             Spacer()
@@ -53,5 +55,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(menu: MenuModel().menu)
 }
