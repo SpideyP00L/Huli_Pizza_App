@@ -11,6 +11,7 @@ struct MenuItemView: View {
     
     @State private var addedItem: Bool = false
     @Binding var item: MenuItem
+    @ObservedObject var orders: OrderModel
     
     var body: some View {
         VStack {
@@ -39,8 +40,6 @@ struct MenuItemView: View {
             .shadow(color: .teal,  radius: 5, x : 8, y : 8)
             
             VStack (alignment: .leading) {
-                
-                
                 ScrollView {
                     Text(item.description)
                         .font(.custom("Georgia", size: 18, relativeTo: .title))
@@ -49,16 +48,18 @@ struct MenuItemView: View {
             
             Button {
                 addedItem = true
+                orders.addOrder(item, quantity: 1)
             } label: {
                 Spacer()
                 
-                Text(12.99, format: .currency(code: "CAD"))
+                Text(item.price, format: .currency(code: "CAD"))
                     .bold()
                 
                 Image(systemName: addedItem ? "cart.fill.badge.plus" : "cart.badge.plus")
                 
                 Spacer()
             }
+            .disabled(item.id < 0)
             .padding()
             .background(.red, in: Capsule())
             .foregroundStyle(.white)
@@ -68,5 +69,5 @@ struct MenuItemView: View {
 }
 
 #Preview {
-    MenuItemView(item: .constant(testMenuItem))
+    MenuItemView(item: .constant(testMenuItem), orders: OrderModel())
 }
