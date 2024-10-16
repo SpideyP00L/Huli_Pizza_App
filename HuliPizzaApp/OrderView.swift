@@ -9,48 +9,56 @@ import SwiftUI
 
 struct OrderView: View {
     
-    var orders: [Int]
+    @Binding var orders: [OrderItem]
     
     var body: some View {
-        ZStack(alignment: .top) {
-            
-            
-            
-            ScrollView {
-                ForEach (orders, id: \.self)  { order in
-                    OrderRowView(order: order)
-                        .padding(4)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
-                        .shadow(radius: 10)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal)
+        VStack {
+            ZStack(alignment: .top) {
+                ScrollView {
+                    ForEach (orders, id: \.id)  { order in
+                        Text(order.item.name)
+                        //OrderRowView(order: order)
+                            .padding(4)
+                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
+                            .shadow(radius: 10)
+                            .padding(.bottom, 5)
+                            .padding(.horizontal)
+                    }
                 }
+                .padding(.top, 70)
+                
+                HStack {
+                    
+                    Text("Order Pizza")
+                        .font(.title)
+                    
+                    Spacer()
+                    
+                    Label {
+                        Text(59.99, format: .currency(code: "CAD"))
+                    } icon: {
+                        Image(systemName : orders.isEmpty ? "cart" : "cart.circle.fill")
+                    }
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+                
             }
-            .padding(.top, 70)
+            .padding()
             
-            HStack {
-                
-                Text("Order Pizza")
-                    .font(.title)
-                
-                Spacer()
-                
-                Label {
-                    Text(59.99, format: .currency(code: "CAD"))
-                } icon: {
-                    Image(systemName : orders.isEmpty ? "cart" : "cart.circle.fill")
+            Button("Delete Order") {
+                if !orders.isEmpty {
+                    orders.removeLast()
                 }
             }
             .padding()
-            .background(.ultraThinMaterial)
-            
+            .background(.regularMaterial, in: Capsule())
         }
-        .padding()
         .background(Color("Surf"))
     }
 }
 
 
 #Preview {
-    OrderView(orders: [1, 2, 3, 4, 6])
+    OrderView(orders: .constant(testOrders))
 }
